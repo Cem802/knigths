@@ -45,7 +45,16 @@ knowledge2 = And(
 # B says "C is a knave."
 # C says "A is a knight."
 knowledge3 = And(
-    # TODO
+    Or(And(AKnight, Not(AKnave)), And(Not(AKnight), AKnave)),
+    Or(And(BKnight, Not(BKnave)), And(Not(BKnight), BKnave)),
+    Or(And(CKnight, Not(CKnave)), And(Not(CKnight), CKnave)),
+    Biconditional(AKnight, Or(AKnight, AKnave)),
+    Biconditional(BKnight, Biconditional(AKnight, AKnave)),
+    Biconditional(BKnave, Not(Biconditional(AKnight, AKnave))),
+    Biconditional(BKnight, CKnave),
+    Biconditional(BKnave, Not(CKnave)),
+    Biconditional(CKnight, AKnight),
+    Biconditional(CKnave, Not(AKnight))
 )
 
 
